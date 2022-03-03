@@ -13,14 +13,38 @@ applications:
       plugin:
         name: helm-overdrive
         env:
-          # - name: yggdrasilUrl
-          #   value: https://github.com/Energinet-DataHub/eo-base-environment
-          # - name: yggdrasilRevision
-          #   value: main
-          - name: folder
-            value: applications/guestbook
-          # - name: extra # optional ???
-          #   value: applications/guestbook/extra
+          - name: git-repo
+            value: https://github.com/Energinet-DataHub/eo-base-environment
+          - name: git-rev
+            value: main
+          - name: base-config
+            value: base/applications/guestbook/guestbook_values.yaml
+          - name: base-extra
+            value: base/applications/guestbook/extra
+          - name: base-globals-yaml
+            value: base/global.yaml
+
+          - name: env-config
+            value: env/{{ .Values.env }}/applications/guestbook/guestbook_values.yaml
+          - name: env-extra
+            value: env/{{ .Values.env }}/applications/guestbook/extra
+          - name: env-globals-yaml
+            value: env/{{ .Values.env }}/global.yaml
+
+# global.yaml = base-globals.yaml yaml-merge env-globals.yaml
+# base.yaml = gotemplate base-config global.yaml
+# env.yaml = gotemplate env-config global.yaml
+# conf.yaml = base.yaml yaml-merge env.yaml
+# helm template chart conf.yaml > manifest.yaml
+# helm create extra
+# rm -r ./extra/templates/*
+# cp -r ./base-extra ./extra/template/
+# cp -r ./env-extra ./extra/template/
+# cp conf.yaml ./extra/values.yaml
+# helm template ./extra >> manifest.yaml
+# return manifest.yaml
+
+
 
 
   - name: ingress
