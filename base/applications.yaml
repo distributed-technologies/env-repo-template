@@ -1,0 +1,69 @@
+
+#Projects ??
+
+
+applications:
+
+  - name: guestbook
+    project: default
+    source:
+      repoURL: https://cloudnativeapp.github.io/charts/curated/
+      chart: guestbook
+      targetRevision: 0.2.0
+    plugin:
+      name: helm-overdrive
+      env:
+        - name: yggdrasilUrl
+          value: https://github.com/Energinet-DataHub/eo-base-environment
+        - name: yggdrasilRevision
+          value: main
+        - name: folder
+          value: applications/guestbook
+        # - name: extra # optional ???
+        #   value: applications/guestbook/extra
+
+
+  - name: ingress
+    source:
+      repoURL: "https://github.com/distributed-technologies/services-traefik.git"
+      chart: traefik
+      targetRevision: 10.14.2
+
+  
+      
+
+  - name: ingress
+    source:
+      repoURL: https://distributed-technologies.github.io/helm-charts/
+      chart: grafana
+      targetRevision: 0.1.10
+      valuesFile: "grafana/grafana_values.yaml"
+    plugin:
+      name: argocd-overdrive
+      # environment variables passed to the plugin
+      env:
+        #- name: repo
+        #  value: https://github.com/Energinet-DataHub/eo-base-environment # Posibly automatic
+        - name: folder
+          value: applications/grafana
+        - name: overrides
+          value: applications/grafana/extra
+
+  - name: traefik
+    # ...
+
+  - name: cert-manager
+    # ...
+
+  - name: loki
+    # ...
+
+  - name: prometheus
+    # ...
+
+  - name: sealed-secrets
+    # ...
+
+# helm template
+# concat overrides
+# -> stdout
