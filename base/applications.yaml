@@ -10,17 +10,17 @@ applications:
       repoURL: https://cloudnativeapp.github.io/charts/curated/
       chart: guestbook
       targetRevision: 0.2.0
-    plugin:
-      name: helm-overdrive
-      env:
-        - name: yggdrasilUrl
-          value: https://github.com/Energinet-DataHub/eo-base-environment
-        - name: yggdrasilRevision
-          value: main
-        - name: folder
-          value: applications/guestbook
-        # - name: extra # optional ???
-        #   value: applications/guestbook/extra
+      plugin:
+        name: helm-overdrive
+        env:
+          # - name: yggdrasilUrl
+          #   value: https://github.com/Energinet-DataHub/eo-base-environment
+          # - name: yggdrasilRevision
+          #   value: main
+          - name: folder
+            value: applications/guestbook
+          # - name: extra # optional ???
+          #   value: applications/guestbook/extra
 
 
   - name: ingress

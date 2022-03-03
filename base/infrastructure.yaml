@@ -3,13 +3,13 @@
 # azure | aws | gcp | self-hosted 
 
 kubernetes:
-  hosted:
-    provider: azure # azure | aws | gcp
-    variables:
-      kubernetesVersion: 1.21.9
-      staticPublicIP: true
+  # hosted:
+  #   provider: azure # azure | aws | gcp
+  #   variables:
+  #     kubernetesVersion: 1.21.9
+  #     staticPublicIP: true
 
-  # selfHosted:
+  # selfHosted: # currently not though to be nessesary, people should manually boostrap.
   #   some-ref-to-how-to-connect?
   #   disable all workflows, expect manual install of nidhogg to bootstrap?
 

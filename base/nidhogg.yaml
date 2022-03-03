@@ -1,5 +1,2 @@
 installCNI: false
 monitorNidhogg: false
-
-yggdrasil:
-  repoURL: "git@github.com:Energinet-DataHub/eo-base-environment.git"
