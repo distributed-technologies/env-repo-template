@@ -1,0 +1,43 @@
+#!/bin/bash
+
+BASE=${1:?boostrap [BASE] [ENV] [GLOBALS] [NIDHOGG]}
+ENV=${2:?boostrap [BASE] [ENV] [GLOBALS] [NIDHOGG]}
+GLOBALS=${3:?boostrap [BASE] [ENV] [GLOBALS] [NIDHOGG]}
+NIDHOGG=${4:?boostrap [BASE] [ENV] [GLOBALS] [NIDHOGG]}
+
+WORK_DIR=_work
+GLOBALS_MERGED=${WORK_DIR}/globals.yaml
+BASE_TEMPLATED=${WORK_DIR}/base_values.yaml
+ENV_TEMPLATED=${WORK_DIR}/env_values.yaml
+MANIFEST=${WORK_DIR}/manifest.yaml
+
+mkdir -p ${WORK_DIR}
+
+function template {
+    local _TEMPLATES=${1:?Must provide an argument}
+    local _VALUES=${2:?Must provide an argument}
+
+    helm create temp > /dev/null
+    rm -r ./temp/templates/*
+    cp ${_TEMPLATES} ./temp/templates/
+    cp ${_VALUES} ./temp/values.yaml
+    helm template temp
+    rm temp -r > /dev/null
+}
+
+yaml-merge ${ENV}/${GLOBALS} ${BASE}/${GLOBALS} > ${GLOBALS_MERGED}
+
+template ${BASE}/${NIDHOGG} ${GLOBALS_MERGED} > ${BASE_TEMPLATED}
+template ${ENV}/${NIDHOGG} ${GLOBALS_MERGED} > ${ENV_TEMPLATED}
+
+yaml-merge ${BASE_TEMPLATED} ${ENV_TEMPLATED} > ${MANIFEST}
+
+VERSION=$(yaml-get --query nidhogg.chart.version ${MANIFEST})
+
+helm upgrade nidhogg nidhogg \
+    --install \
+    --repo https://martinschmidt.github.io/helm-charts/ \
+    --version ${VERSION} \
+    --values ${MANIFEST}
+
+rm -r ${WORK_DIR}

@@ -1,4 +1,4 @@
 overdriveConf:
-  envFolder: /env/production 
+  envFolder: /env/preview 
   
 ingressDomain: preview.example.com
