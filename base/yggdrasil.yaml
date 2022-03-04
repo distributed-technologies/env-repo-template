@@ -1,0 +1,45 @@
+# --- template parameters from global ---
+
+repo:
+  URL: {{ .Values.repo.URL }}
+  targetRevision: {{ .Values.repo.targetRevision }}
+  path: {{ .Values.repo.path }}
+
+overdriveConf:
+  baseFolder: {{ .Values.overdriveConf.baseFolder }}
+  envFolder: {{ .Values.overdriveConf.envFolder }}
+  globalsFile: {{ .Values.overdriveConf.globalsFile }}
+
+# --- additional parameters ---
+
+# The applications to be created by yggdrasil in the short format
+projects:
+  # Example guestbook project
+  - name: guestbook-project
+    description: The project containing the guestbook app
+    namespace: guestbook
+  
+# The applications to be created by yggdrasil in the short format
+applications:
+  # Example guestbook app 
+  - name: guestbook
+    project: guestbook-project
+    namespace: guestbook
+    chart:
+      repo: https://cloudnativeapp.github.io/charts/curated/
+      name: guestbook
+      version: 0.2.0
+    overdrive:
+      valuesFile: applications/guestbook/guestbook_values.yaml
+      additionalResources: applications/guestbook/additional_resources
+
+additionalManifests:
+  # # additional manifests can be added as a list.
+  # - apiVersion: v1
+  #   kind: Secret
+  #   metadata:
+  #     name: mysecret
+  #   type: Opaque
+  #   data:
+  #     USER_NAME: YWRtaW4=
+  #     PASSWORD: MWYyZDFlMmU2N2Rm

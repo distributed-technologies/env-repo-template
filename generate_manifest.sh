@@ -5,17 +5,22 @@
 # https://argo-cd.readthedocs.io/en/stable/user-guide/build-environment/
 ARGOCD_APP_NAME=my-guestbook
 ARGOCD_APP_NAMESPACE=my-namespace
-ARGOCD_APP_SOURCE_PATH=guestbook
-ARGOCD_APP_SOURCE_REPO_URL=https://cloudnativeapp.github.io/charts/curated/
-ARGOCD_APP_SOURCE_TARGET_REVISION=0.2.0
+ARGOCD_APP_SOURCE_PATH=
+ARGOCD_APP_SOURCE_REPO_URL=
+ARGOCD_APP_SOURCE_TARGET_REVISION=
 
 # Plugin env variables
 # User configurable
-BASE_EXTRA=base/applications/guestbook/extra
-ENV_EXTRA=env/preview/applications/guestbook/extra
 
-BASE_GLOBAL=base/global.yaml
-ENV_GLOBAL=env/preview/global.yaml
+HELM_REPO=https://cloudnativeapp.github.io/charts/curated/
+CHART_NAME=guestbook
+CHART_VERSION=0.2.0
+
+BASE_EXTRA=base/applications/guestbook/additional_resources
+ENV_EXTRA=env/preview/applications/guestbook/additional_resources
+
+BASE_GLOBAL=base/globals.yaml
+ENV_GLOBAL=env/preview/globals.yaml
 
 BASE_VALUES=base/applications/guestbook/guestbook_values.yaml
 ENV_VALUES=env/preview/applications/guestbook/guestbook_values.yaml
@@ -70,10 +75,10 @@ MANIFEST=${WORK_DIR}/manifest.yaml
   rm ${ENV_VALUES_TEMPLATED}
 
   # Template the helm chart with the generated values.yaml
-  helm template ${ARGOCD_APP_NAME} ${ARGOCD_APP_SOURCE_PATH}
-      --repo ${ARGOCD_APP_SOURCE_REPO_URL}  \
+  helm template ${ARGOCD_APP_NAME} ${CHART_NAME} \
+      --repo ${HELM_REPO}  \
       --namespace ${ARGOCD_APP_NAMESPACE} \
-      --version ${ARGOCD_APP_SOURCE_TARGET_REVISION} \
+      --version ${CHART_VERSION} \
       --values ${VALUES} \
       > ${MANIFEST}
 

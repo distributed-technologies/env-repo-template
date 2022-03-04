@@ -1,0 +1,16 @@
+# --- nidhogg and yggdrasil ---
+
+repo:
+  URL: https://github.com/distributed-technologies/env-repo-template
+  targetRevision: main
+  path: .
+
+overdriveConf:
+  baseFolder: base
+  globalsFile: globals.yaml
+
+# --- domain ---
+
+ingressDomain: fake.example.com
+
+
