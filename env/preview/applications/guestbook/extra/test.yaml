@@ -5,11 +5,11 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: {{ .Values.ingressDomain }}
+  ingressClassName: nginx-example
   rules:
   - http:
       paths:
-      - path: /testpath
+      - path: {{ .Values.ingressDomain }}/testpath
         pathType: Prefix
         backend:
           service:

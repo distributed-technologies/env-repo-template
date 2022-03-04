@@ -7,16 +7,19 @@ applications:
   - name: guestbook
     project: default
     source:
-      repoURL: https://cloudnativeapp.github.io/charts/curated/
-      chart: guestbook
-      targetRevision: 0.2.0
+      # repoURL: https://github.com/Energinet-DataHub/eo-base-environment
+      # targetRevision: main
+      # path: .
       plugin:
         name: helm-overdrive
         env:
-          - name: git-repo
-            value: https://github.com/Energinet-DataHub/eo-base-environment
-          - name: git-rev
-            value: main
+          - name: helm-repo
+            value: https://cloudnativeapp.github.io/charts/curated/
+          - name: helm-chart
+            value: guestbook
+          - name: chart-version
+            value: 0.2.0
+
           - name: base-config
             value: base/applications/guestbook/guestbook_values.yaml
           - name: base-extra

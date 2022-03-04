@@ -27,7 +27,6 @@ WORK_EXTRA=${WORK_DIR}/extra
 BASE_VALUES_TEMPLATED=${WORK_DIR}/base_VALUES.yaml
 ENV_VALUES_TEMPLATED=${WORK_DIR}/env_VALUES.yaml
 
-TEMP_VALUES=${WORK_DIR}/temp_values.yaml
 GLOBAL=${WORK_DIR}/global.yaml
 
 VALUES=${WORK_DIR}/values.yaml
@@ -66,15 +65,9 @@ MANIFEST=${WORK_DIR}/manifest.yaml
   template ${ENV_VALUES} ${GLOBAL} > ${ENV_VALUES_TEMPLATED}
 
   # Merge base and env values.yaml, and remove temp files
-  yaml-merge ${BASE_VALUES_TEMPLATED} ${ENV_VALUES_TEMPLATED} > ${TEMP_VALUES}
+  yaml-merge ${BASE_VALUES_TEMPLATED} ${ENV_VALUES_TEMPLATED} > ${VALUES}
   rm ${BASE_VALUES_TEMPLATED}
   rm ${ENV_VALUES_TEMPLATED}
-
-  # TODO: discuss, This might cause issues and is not required
-  # Merge globals and temp_values to the final values.yaml
-  yaml-merge ${GLOBAL} ${TEMP_VALUES} > ${VALUES}
-  rm ${GLOBAL}
-  rm ${TEMP_VALUES}
 
   # Template the helm chart with the generated values.yaml
   helm template ${ARGOCD_APP_NAME} ${ARGOCD_APP_SOURCE_PATH}
