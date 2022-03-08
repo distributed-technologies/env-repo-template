@@ -25,7 +25,7 @@ function template {
     rm temp -r > /dev/null
 }
 
-yaml-merge ${ENV}/${GLOBALS} ${BASE}/${GLOBALS} > ${GLOBALS_MERGED}
+yaml-merge ${BASE}/${GLOBALS} ${ENV}/${GLOBALS} > ${GLOBALS_MERGED}
 
 template ${BASE}/${NIDHOGG} ${GLOBALS_MERGED} > ${BASE_TEMPLATED}
 template ${ENV}/${NIDHOGG} ${GLOBALS_MERGED} > ${ENV_TEMPLATED}
