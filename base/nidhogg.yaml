@@ -16,7 +16,7 @@ overdriveConf:
 nidhogg:
   valuesFile: nidhogg.yaml
   chart:
-    version: 2.0.0-rc.14
+    version: 2.0.0-rc.15
 
 # yggdrasil:
 #   valuesFile: yggdrasil.yaml
@@ -25,7 +25,7 @@ additionalManifests:
 - apiVersion: argoproj.io/v1alpha1
   kind: Application
   metadata:
-    name: guestbook47
+    name: guestbook49
     finalizers:
       - resources-finalizer.argocd.argoproj.io
   spec:
