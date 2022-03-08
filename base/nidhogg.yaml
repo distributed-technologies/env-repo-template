@@ -25,7 +25,7 @@ additionalManifests:
 - apiVersion: argoproj.io/v1alpha1
   kind: Application
   metadata:
-    name: guestbook46
+    name: guestbook47
     finalizers:
       - resources-finalizer.argocd.argoproj.io
   spec:
