@@ -1,5 +1,5 @@
 overdriveConf:
-  envFolder: /env/preview 
+  envFolder: env/preview 
 
 repo:
   targetRevision: initial-suggestion
