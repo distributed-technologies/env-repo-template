@@ -2,6 +2,6 @@ overdriveConf:
   envFolder: /env/preview 
 
 repo:
-  targetRevision: origin/initial-suggestion
+  targetRevision: initial-suggestion
 
 ingressDomain: preview.example.com
