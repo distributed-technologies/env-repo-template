@@ -1,0 +1,7 @@
+argo-cd:
+  server:
+    replicas: 1
+  redis-ha:
+    enabled: false
+  redis:
+    enabled: true
