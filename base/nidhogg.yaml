@@ -16,12 +16,49 @@ overdriveConf:
 nidhogg:
   valuesFile: nidhogg.yaml
   chart:
-    version: 2.0.0-rc.13
+    version: 2.0.0-rc.14
 
 # yggdrasil:
 #   valuesFile: yggdrasil.yaml
 
 additionalManifests:
+- apiVersion: argoproj.io/v1alpha1
+  kind: Application
+  metadata:
+    name: guestbook46
+    finalizers:
+      - resources-finalizer.argocd.argoproj.io
+  spec:
+    project: yggdrasil
+    source:
+      repoURL: 'https://github.com/distributed-technologies/env-repo-template'
+      path: .
+      targetRevision: initial-suggestion
+      plugin:
+        env:
+          - name: HELM_REPO
+            value: https://cloudnativeapp.github.io/charts/curated/
+          - name: CHART_NAME
+            value: guestbook
+          - name: CHART_VERSION
+            value: 0.2.0
+          - name: BASE_VALUES
+            value: base/applications/guestbook/guestbook_values.yaml
+          - name: BASE_GLOBAL
+            value: base/globals.yaml
+          - name: ENV_VALUES
+            value: env/preview/applications/guestbook/guestbook_values.yaml
+          - name: ENV_GLOBAL
+            value: env/preview/globals.yaml
+    destination:
+      server: 'https://kubernetes.default.svc'
+      namespace: default
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
+
+
   # # additional manifests can be added as a list.
   # - apiVersion: v1
   #   kind: Secret
