@@ -16,7 +16,7 @@ overdriveConf:
 nidhogg:
   valuesFile: nidhogg.yaml
   chart:
-    version: 2.0.0-rc.18
+    version: 2.0.0-rc.19
 
 yggdrasil:
   valuesFile: yggdrasil.yaml
