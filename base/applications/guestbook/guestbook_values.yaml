@@ -1,3 +1,6 @@
 replicaCount: 3
 something: cow
 url: {{ .Values.ingressDomain }}
+
+redis:
+  slaveEnabled: false
