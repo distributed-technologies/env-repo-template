@@ -10,7 +10,7 @@ spec:
   - host: {{ .Values.ingressDomain }}
     http:
       paths:
-      - path: testpath
+      - path: /testpath
         pathType: Prefix
         backend:
           service:
