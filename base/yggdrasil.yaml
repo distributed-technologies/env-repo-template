@@ -34,6 +34,11 @@ applications:
       additionalResources: applications/guestbook/additional_resources
 
 additionalManifests:
+  - kind: Namespace
+    apiVersion: v1
+    metadata:
+      name: guestbook
+
   # # additional manifests can be added as a list.
   # - apiVersion: v1
   #   kind: Secret
