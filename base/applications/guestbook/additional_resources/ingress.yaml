@@ -7,9 +7,10 @@ metadata:
 spec:
   ingressClassName: nginx-example
   rules:
-  - http:
+  - host: {{ .Values.ingressDomain }}
+    http:
       paths:
-      - path: {{ .Values.ingressDomain }}/testpath
+      - path: testpath
         pathType: Prefix
         backend:
           service:
