@@ -10,6 +10,22 @@ The simplest way to do the first install is to call the boostrap script:
 
 ```bash
 
+kind create cluster
 ./bootstrap base env/preview globals.yaml nidhogg.yaml
 
 ```
+
+## Argo Secret
+
+```bash
+
+kubectl get secret argocd-initial-admin-secret -o json | jq -r .data.password | base64 -d
+
+```
+
+## Port forward to ArgoCD
+```bash
+kubectl port-forward svc/nidhogg-argocd-server 8080:80
+```
+
+
